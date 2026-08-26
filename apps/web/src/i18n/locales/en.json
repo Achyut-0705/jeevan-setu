@@ -1,0 +1,680 @@
+{
+  "common": {
+    "appName": "JeevanSetu",
+    "tagline": "Your life certificate, from the comfort of home",
+    "continue": "Continue",
+    "back": "Back",
+    "retry": "Try again",
+    "tryAnotherWay": "Try another way",
+    "loading": "Just a moment…",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "logout": "Log out",
+    "points": "points",
+    "language": "Language",
+    "needHelp": "Need help?",
+    "close": "Close",
+    "next": "Next",
+    "previous": "Back",
+    "done": "Done",
+    "skip": "Skip",
+    "refresh": "Refresh",
+    "copy": "Copy",
+    "copied": "Copied",
+    "notAvailable": "Not available",
+    "somethingWrong": "Something went wrong. Please try again."
+  },
+  "auth": {
+    "title": "Sign in with Aadhaar",
+    "subtitle": "Enter the mobile number that is registered with your Aadhaar. We will take you to Aadhaar to confirm it is you.",
+    "mobileLabel": "Aadhaar-registered mobile number",
+    "mobilePlaceholder": "10-digit mobile number",
+    "sendCode": "Send me a code",
+    "otpTitle": "Enter the code we sent",
+    "otpSubtitle": "We sent a 6-digit code to {{mobile}}",
+    "otpLabel": "6-digit code",
+    "verify": "Verify and continue",
+    "demoUsersTitle": "Demo accounts",
+    "demoHint": "This is a prototype. Tap a person below to fill in their Aadhaar-registered number.",
+    "resend": "Send a new code",
+    "changeNumber": "Use a different number",
+    "mobileHelp": "This must be the number linked to your Aadhaar — not any other number you use.",
+    "redirectNotice": "You will be taken to the Aadhaar service to enter your one-time code. JeevanSetu never sees that code.",
+    "continueToAadhaar": "Continue to Aadhaar",
+    "demoAge": "Age {{age}}",
+    "demoOtp": "For this demo, the Aadhaar OTP is always {{code}}.",
+    "pensionStatus": {
+      "active": "Pension active",
+      "stopped": "Pension stopped",
+      "not_eligible": "No pension"
+    },
+    "errors": {
+      "title": "We could not continue",
+      "format": "Please enter a 10-digit mobile number.",
+      "generic": "Something went wrong. Please try again.",
+      "directory": "We could not load the demo accounts. You can still type an Aadhaar-registered number above."
+    }
+  },
+  "dashboard": {
+    "welcomeBack": "Welcome back, {{name}}",
+    "pensionCard": {
+      "title": "Your pension",
+      "monthly": "Monthly amount",
+      "pensionId": "Pension ID",
+      "bank": "Paid to"
+    },
+    "certificateStatus": {
+      "title": "Life certificate status",
+      "none": "You haven't submitted a life certificate yet.",
+      "active": "Your certificate is active and your pension is safe.",
+      "expired": "Your certificate has expired. Let's renew it — it only takes a few minutes.",
+      "provisional": "Your certificate is provisional. Adding one more confirmation makes it fully verified.",
+      "validUntil": "Valid until {{date}}"
+    },
+    "startVerification": "Start my life certificate",
+    "resumeVerification": "Continue where I left off",
+    "needAssistance": "Ask a family member for help",
+    "timelineTitle": "Your certificate history",
+    "noHistory": "No certificates yet — let's create your first one."
+  },
+  "tier": {
+    "started": {
+      "label": "Just started",
+      "description": "You've begun. Every step helps."
+    },
+    "building": {
+      "label": "Building trust",
+      "description": "You're more than halfway there."
+    },
+    "provisional": {
+      "label": "Provisionally verified",
+      "description": "Your pension continues uninterrupted."
+    },
+    "verified": {
+      "label": "Fully verified",
+      "description": "Your certificate is complete for the year."
+    }
+  },
+  "signal": {
+    "phone_otp": {
+      "label": "Phone verification",
+      "description": "Confirmed when you signed in"
+    },
+    "trusted_device": {
+      "label": "Trusted device",
+      "description": "This device has been used by you before"
+    },
+    "location_consistency": {
+      "label": "Location check",
+      "description": "Matches your registered address"
+    },
+    "pension_record_match": {
+      "label": "Pension record match",
+      "description": "Matches your pension details"
+    },
+    "face_match": {
+      "label": "Photo match",
+      "description": "A quick selfie to confirm it's you"
+    },
+    "liveness_challenge": {
+      "label": "Liveness check",
+      "description": "A simple action like a smile or blink"
+    },
+    "voice_phrase": {
+      "label": "Voice check",
+      "description": "Say a short phrase out loud"
+    },
+    "document_upload": {
+      "label": "Document upload",
+      "description": "A photo of your pension document"
+    },
+    "family_confirmation": {
+      "label": "Family confirmation",
+      "description": "A family member confirms it's you"
+    },
+    "video_verification": {
+      "label": "Video verification",
+      "description": "A short video call with an assistant"
+    },
+    "manual_review": {
+      "label": "Assisted review",
+      "description": "A person reviews your details personally"
+    },
+    "continuity_history": {
+      "label": "Verification history",
+      "description": "You've verified successfully before"
+    }
+  },
+  "action": {
+    "phone_otp": "Verify by phone",
+    "face_match": "Take a quick selfie",
+    "liveness_challenge": "Try the liveness check",
+    "voice_phrase": "Say a short phrase",
+    "document_upload": "Upload a document",
+    "family_confirmation": "Ask family to confirm",
+    "video_verification": "Start a video verification",
+    "manual_review": "Ask a person for help",
+    "retry": {
+      "face_match": "Try the selfie again",
+      "liveness_challenge": "Try the liveness check again",
+      "voice_phrase": "Try the voice check again",
+      "document_upload": "Try the document upload again"
+    }
+  },
+  "verify": {
+    "trustScore": "Your trust score",
+    "whatNext": "What can I do next?",
+    "timeline": "What's happened so far",
+    "startSession": "Let's build your trust score",
+    "startSessionBody": "Every step you complete adds to your score. If something doesn't work perfectly, that's alright — we'll always show you another way.",
+    "faceMatch": {
+      "title": "Take a quick selfie",
+      "body": "Look at the camera and make sure your face is clearly visible.",
+      "capture": "Take photo",
+      "retake": "Retake"
+    },
+    "liveness": {
+      "title": "Liveness check",
+      "body": "Please follow the instruction below.",
+      "start": "Start check"
+    },
+    "voice": {
+      "title": "Voice check",
+      "body": "Please say this phrase clearly:",
+      "record": "Start recording",
+      "stop": "Stop"
+    },
+    "document": {
+      "title": "Upload a document",
+      "body": "A photo of your pension book or ID card works well.",
+      "upload": "Choose photo"
+    },
+    "family": {
+      "title": "Ask family to confirm",
+      "body": "We'll send a message to your family member asking them to confirm it's you.",
+      "selectContact": "Choose who to ask",
+      "send": "Send request",
+      "sent": "Request sent! We'll update your score as soon as they respond.",
+      "addContact": "Add a family contact"
+    },
+    "video": {
+      "title": "Video verification",
+      "body": "A short video call with our verification assistant.",
+      "start": "Start now",
+      "schedule": "Schedule for later"
+    },
+    "manualReview": {
+      "title": "Ask our team for help",
+      "body": "A verification officer will look at your case and get back to you. This always works — no pressure.",
+      "request": "Request assisted review",
+      "pending": "A person is reviewing your details now. This usually takes a moment.",
+      "approved": "You've been personally verified!"
+    },
+    "issueCertificate": "Get my certificate",
+    "notEligibleYet": "Keep going — a little more and you'll be ready for your certificate."
+  },
+  "certificate": {
+    "title": "Digital Life Certificate",
+    "provisional": "Provisional Certificate",
+    "full": "Full Certificate",
+    "issuedOn": "Issued on {{date}}",
+    "issuedOnLabel": "Issued on",
+    "validUntil": "Valid until {{date}}",
+    "validUntilLabel": "Valid until",
+    "trustScore": "Trust confidence score",
+    "methodsUsed": "Verification methods used",
+    "download": "Download PDF",
+    "share": "Share with family",
+    "backToDashboard": "Back to dashboard",
+    "disclaimer": "This is a demonstration certificate generated for a hackathon prototype. It is not issued by any government authority.",
+    "verificationCode": "Verification code",
+    "verifyAt": "Verify this certificate at",
+    "holder": "Issued to",
+    "passbookNumber": "Passbook number",
+    "aadhaarNumber": "Aadhaar number",
+    "agency": "Disbursing agency",
+    "account": "Bank account",
+    "shareCopied": "Verification link copied. Anyone with this link can check the certificate is genuine.",
+    "shareTitle": "Share verification link",
+    "downloadFailed": "We could not prepare your certificate PDF.",
+    "downloadStarted": "Your certificate is downloading.",
+    "redactedNotice": "Some personal details are hidden. Sign in as the certificate holder to see the full certificate.",
+    "notFound": "We could not find a certificate with that code.",
+    "notFoundHelp": "Check the code printed under the QR code and try again.",
+    "expiredNotice": "This certificate has expired.",
+    "validNotice": "This certificate is valid.",
+    "checkTitle": "Certificate check",
+    "ownerNotice": "This is your certificate.",
+    "provisionalNotice": "This is a provisional certificate, valid for 30 days. Complete your verification call to get the full 12-month certificate.",
+    "callRequired": "One step left: a verification call",
+    "callRequiredBody": "Your confidence score is high enough. A verification officer needs to confirm it is you before the full certificate can be issued."
+  },
+  "family": {
+    "confirmTitle": "Help confirm it's really them",
+    "confirmBody": "{{name}} needs your help confirming their pension life certificate.",
+    "relation": "Relationship",
+    "confirmButton": "Yes, this is {{name}}",
+    "declineButton": "This doesn't look right",
+    "statementLabel": "Add a note (optional)",
+    "thankYou": "Thank you! Your confirmation has been recorded.",
+    "declined": "Thanks for letting us know. We'll follow up.",
+    "expired": "This link has expired.",
+    "canAttest": "Can confirm",
+    "addHelp": "They will get a message asking them to confirm it's you.",
+    "added": "Family contact added",
+    "demoLink": "Demo: open this link to act as the family member.",
+    "cannotAttest": "Cannot confirm",
+    "cannotAttestHelp": "Aadhaar does not have a verified mobile number for this relative.",
+    "noneOnRecord": "Your Aadhaar record has no family members linked to it.",
+    "noneOnRecordHelp": "That is not a problem — you can still finish with a selfie, a document, or a verification call.",
+    "sentTo": "Request sent to {{mobile}}"
+  },
+  "a11y": {
+    "fontSize": "Text size",
+    "highContrast": "High contrast",
+    "reducedMotion": "Reduce motion",
+    "darkMode": "Dark mode",
+    "theme": "Appearance",
+    "preferences": "Accessibility",
+    "fontSizeHelp": "Make all text larger or smaller",
+    "highContrastHelp": "Stronger contrast between text and background",
+    "reducedMotionHelp": "Turn off animations and movement",
+    "darkModeHelp": "Use a dark colour scheme",
+    "languageHelp": "Choose the language for the whole app"
+  },
+  "nav": {
+    "main": "Main",
+    "account": "Account",
+    "dashboard": "Dashboard",
+    "verify": "Verification",
+    "certificates": "Certificates",
+    "family": "Family",
+    "profile": "My details",
+    "settings": "Settings",
+    "pension": "Pension",
+    "reviews": "Help requests",
+    "appointments": "Verification call"
+  },
+  "profile": {
+    "title": "My details",
+    "subtitle": "These are the details on file for your pension. Please check they are correct.",
+    "personal": "Personal details",
+    "name": "Full name",
+    "dob": "Date of birth",
+    "gender": "Gender",
+    "mobile": "Mobile number",
+    "address": "Address",
+    "pension": "Pension details",
+    "pensionId": "Pension ID",
+    "authority": "Sanctioning authority",
+    "agency": "Disbursing agency",
+    "monthly": "Monthly amount",
+    "lastCredited": "Last credited",
+    "bank": "Bank account",
+    "account": "Account number",
+    "ifsc": "IFSC code",
+    "branch": "Branch",
+    "faceId": "Face ID",
+    "faceIdEnrolled": "Set up on {{date}}",
+    "faceIdMissing": "Not set up yet",
+    "faceIdHelp": "A reference photo lets us confirm it's you from a selfie.",
+    "setupFaceId": "Set up Face ID",
+    "redoFaceId": "Set up again",
+    "familyContacts": "Family contacts",
+    "noFamily": "No family contacts added yet.",
+    "passbookNumber": "Passbook number",
+    "aadhaarNumber": "Aadhaar number",
+    "sourceAadhaar": "From your Aadhaar record",
+    "readOnlyNotice": "These details come from your Aadhaar record and cannot be changed here. To correct them, update your Aadhaar.",
+    "faceIdAadhaarLinked": "Registered against Aadhaar {{uid}}",
+    "faceIdTxn": "Aadhaar reference {{txn}}",
+    "faceIdNeedsConsent": "Setting up Face ID takes you to Aadhaar to confirm your identity and give consent.",
+    "familyReadOnly": "Family members are read from your Aadhaar record. They cannot be added or edited here."
+  },
+  "category": {
+    "otp": "Phone",
+    "biometric": "Biometric",
+    "social": "People",
+    "documentary": "Documents",
+    "passive": "Automatic"
+  },
+  "effort": {
+    "none": "Instant",
+    "low": "Quick",
+    "medium": "A minute",
+    "high": "A few minutes",
+    "assisted": "With help"
+  },
+  "camera": {
+    "starting": "Opening your camera…",
+    "loadingModels": "Getting ready…",
+    "blocked": "We couldn't open the camera.",
+    "blockedTitle": "Camera not available",
+    "blockedBody": "No problem at all — you can confirm your identity another way instead.",
+    "guidance": {
+      "loading": "Getting ready…",
+      "no_face": "Please look at the camera",
+      "multiple_faces": "Only one person in the picture, please",
+      "too_far": "Please come a little closer",
+      "off_centre": "Move so your face is inside the circle",
+      "too_dark": "A bit more light would help",
+      "hold_still": "Hold still…",
+      "ready": "That's perfect — hold still"
+    }
+  },
+  "liveness": {
+    "title": "Liveness check",
+    "intro": "This makes sure it's really you in front of the camera, not a photo.",
+    "start": "Start check",
+    "instruction": {
+      "blink": "Please blink twice",
+      "turn_left": "Slowly turn your head to the left",
+      "turn_right": "Slowly turn your head to the right",
+      "smile": "Please smile"
+    },
+    "detected": "Well done!",
+    "timeout": "We didn't quite catch that — no problem, let's try again or use another way.",
+    "watching": "Watching…"
+  },
+  "enroll": {
+    "title": "Set up Face ID",
+    "intro": "We need one reference photo of you. Later, a quick selfie is compared against it to confirm it's you.",
+    "chooseMethod": "How would you like to do this?",
+    "selfieTitle": "Take a photo now",
+    "selfieBody": "Use your camera to capture a clear photo of your face.",
+    "documentTitle": "Use my pension document",
+    "documentBody": "Photograph your pension book or ID card — we'll read the photo on it.",
+    "capture": "Use this photo",
+    "processing": "Checking the photo…",
+    "success": "Face ID is set up",
+    "successBody": "You can now verify with a quick selfie.",
+    "noFace": "We couldn't find a face in that photo. Try again with more light.",
+    "chooseFile": "Choose a photo",
+    "privacy": "We store only a mathematical summary of your face, never the photo itself."
+  },
+  "voice": {
+    "title": "Voice check",
+    "intro": "Please read this sentence out loud.",
+    "record": "Start speaking",
+    "stop": "I'm done",
+    "listening": "Listening…",
+    "heard": "We heard:",
+    "noSpeech": "This browser can't understand speech, so we'll just check that you spoke.",
+    "micDenied": "Microphone permission was blocked. You can allow it, or use another method.",
+    "submit": "Send my answer"
+  },
+  "document": {
+    "title": "Upload a document",
+    "intro": "A photo of your pension book or ID card works well.",
+    "choose": "Choose a photo",
+    "reading": "Reading your document…",
+    "found": "We read this from your document:",
+    "submit": "Use this document",
+    "noText": "We couldn't read any text. Try a clearer, brighter photo — or use another method."
+  },
+  "aadhaar": {
+    "authorityName": "Unique Identification Authority of India",
+    "authoritySub": "Aadhaar Authentication Service",
+    "stepCounter": "Step {{step}} of {{total}}",
+    "simulationNotice": "Simulated Aadhaar service. This is a hackathon prototype — it is not connected to UIDAI, and no real Aadhaar data is used.",
+    "footer": "You were sent here by JeevanSetu. Nothing is shared until you agree.",
+    "otpTitle": "Enter your Aadhaar OTP",
+    "otpSubtitle": "We sent a 6-digit code to {{mobile}}, the mobile registered against Aadhaar {{uid}}.",
+    "otpLabel": "6-digit Aadhaar OTP",
+    "verifyOtp": "Verify",
+    "cancelAndReturn": "Cancel and go back",
+    "requestingEntity": "Requesting service",
+    "holder": "Aadhaar holder",
+    "uidLabel": "Aadhaar number",
+    "familyLabel": "Family members on record",
+    "familyCount": "{{count}} relative linked to your Aadhaar",
+    "familyCount_other": "{{count}} relatives linked to your Aadhaar",
+    "consentTitle": "Share your Aadhaar details with JeevanSetu?",
+    "consentBody": "JeevanSetu is asking to read the details below so it can issue your life certificate.",
+    "faceConsentTitle": "Allow face authentication?",
+    "faceConsentBody": "JeevanSetu wants to register your face against your Aadhaar so a selfie can confirm it is you later.",
+    "purposeLabel": "Purpose",
+    "loginPurpose": "Issuing your digital life certificate and confirming your identity when you renew it.",
+    "facePurpose": "Registering a face template linked to your Aadhaar, so future verification can be done with a selfie from home.",
+    "willShareLabel": "What will be shared",
+    "previewLabel": "The exact details being shared",
+    "withdrawNotice": "You can withdraw this consent at any time from Settings. Withdrawing it also removes your Face ID.",
+    "agree": "I agree, share my details",
+    "decline": "No, do not share",
+    "errors": {
+      "title": "Aadhaar could not continue"
+    },
+    "scope": {
+      "demographics": {
+        "label": "Name, date of birth and gender",
+        "help": "Used to print your life certificate and match your pension record."
+      },
+      "address": {
+        "label": "Registered address",
+        "help": "Used to confirm you are where your pension record says you are."
+      },
+      "family": {
+        "label": "Linked family members",
+        "help": "So a relative on your Aadhaar record can confirm your identity if you need help."
+      },
+      "photo": {
+        "label": "Aadhaar photograph",
+        "help": "Used only to compare against a selfie you take. The photo itself is never stored."
+      },
+      "face_authentication": {
+        "label": "Face authentication",
+        "help": "Lets you verify with a selfie instead of travelling to an office."
+      }
+    },
+    "consentStatus": {
+      "title": "Aadhaar consent",
+      "active": "Active until {{date}}",
+      "none": "No active consent",
+      "revoke": "Withdraw consent",
+      "revoked": "Your Aadhaar consent has been withdrawn.",
+      "help": "JeevanSetu reads your personal details from Aadhaar. Withdrawing consent stops that and removes your Face ID."
+    }
+  },
+  "pension": {
+    "title": "Pension and payments",
+    "subtitle": "Every payment made against your passbook number.",
+    "monthlyAmount": "Monthly pension",
+    "lastCredited": "Last credited",
+    "nextRenewal": "Certificate due by",
+    "withheld": "Payments on hold",
+    "withheldAmount": "₹{{amount}} withheld",
+    "noTransactions": "No payments have been made against this Aadhaar number.",
+    "historyTitle": "Payment history",
+    "columns": {
+      "date": "Date",
+      "amount": "Amount",
+      "account": "Account",
+      "transactionId": "Transaction ID",
+      "mode": "Type",
+      "status": "Status"
+    },
+    "status": {
+      "credited": "Credited",
+      "failed": "Failed",
+      "on_hold": "On hold"
+    },
+    "notEligible": "No pension account is linked to this Aadhaar number.",
+    "daysLeft": "{{count}} day left",
+    "daysLeft_other": "{{count}} days left",
+    "overdue": "Overdue by {{count}} day",
+    "overdue_other": "Overdue by {{count}} days"
+  },
+  "status": {
+    "title": "Your life certificate",
+    "whatNext": "What happens next",
+    "waitingOnUs": "Waiting on us",
+    "badge": {
+      "not_required": "Not needed",
+      "not_started": "Not started",
+      "in_progress": "In progress",
+      "awaiting_review": "With our team",
+      "awaiting_call": "Call booked",
+      "completed": "Verified",
+      "rejected": "Could not verify",
+      "expired": "Expired"
+    }
+  },
+  "reviews": {
+    "title": "Help requests",
+    "subtitle": "Ask a person from our team to look at your case, and follow what happens to your request.",
+    "request": "Request assisted review",
+    "requestTitle": "Ask our team for help",
+    "requestBody": "A verification officer will look at your details and get back to you. Nobody reviews requests instantly — you will be told as soon as there is an update, and you do not need to wait on this page.",
+    "messageLabel": "Tell us what is happening (optional)",
+    "messagePlaceholder": "For example: my pension stopped three months ago and the selfie check keeps failing.",
+    "submit": "Send my request",
+    "submitting": "Sending your request…",
+    "created": "Request {{ticket}} created. Our team will get back to you.",
+    "ticket": "Reference {{ticket}}",
+    "raisedOn": "Raised on {{date}}",
+    "expectBy": "You should hear back by {{date}}",
+    "decidedOn": "Decided on {{date}}",
+    "reviewedBy": "Reviewed by {{name}}",
+    "cancel": "Withdraw this request",
+    "cancelled": "Request withdrawn.",
+    "none": "You have not asked for help yet.",
+    "noneHelp": "If something is not working, our team can review your case personally.",
+    "activity": "What has happened",
+    "cooldown": "You can raise another request on {{date}}.",
+    "cooldownHelp": "Requests are spaced {{days}} days apart so the team can work through them properly.",
+    "alreadyOpen": "You already have an open request ({{ticket}}). We will come back to you on that one.",
+    "loadError": "We could not load your requests.",
+    "status": {
+      "submitted": "Waiting for an officer",
+      "in_review": "An officer is looking at it",
+      "approved": "Approved",
+      "rejected": "Could not be approved",
+      "more_info_needed": "More information needed",
+      "cancelled": "Withdrawn"
+    },
+    "author": {
+      "pensioner": "You",
+      "reviewer": "Verification officer",
+      "system": "JeevanSetu"
+    }
+  },
+  "call": {
+    "title": "Verification call",
+    "subtitle": "A short video call with a verification officer. This is the last step before your life certificate is issued.",
+    "whyTitle": "Why a call?",
+    "whyBody": "Automated checks can keep your pension running on a provisional certificate. A full 12-month certificate needs a person to confirm it is you — the same way a bank does video KYC.",
+    "book": "Book a slot",
+    "booking": "Booking your slot…",
+    "booked": "Your call is booked for {{date}}.",
+    "chooseSlot": "Choose a time",
+    "noSlots": "No slots are available right now. Please try again later.",
+    "slotTaken": "Taken",
+    "joinCode": "Join code {{code}}",
+    "cancel": "Cancel this call",
+    "cancelled": "Your verification call has been cancelled.",
+    "join": "Join the call",
+    "rejoin": "Rejoin the call",
+    "starting": "Connecting you to a verification officer…",
+    "officer": "Verification officer",
+    "simulatedNotice": "Demo: the officer on this call is simulated, and the video is your own camera. The checks, the measurements and the sign-off step work exactly as they would in a real call.",
+    "prepareTitle": "Before you join",
+    "prepare": {
+      "aadhaar": "Keep your Aadhaar card with you",
+      "light": "Sit somewhere with good light",
+      "paper": "Have a pen and a sheet of paper ready",
+      "quiet": "Find a quiet place where you can speak"
+    },
+    "checks": {
+      "title": "What the officer will ask you to do",
+      "show_aadhaar": "Show your Aadhaar card",
+      "show_pan": "Show your PAN card",
+      "sign_on_camera": "Sign your name on camera",
+      "read_phrase": "Read a sentence out loud",
+      "turn_head": "Turn your head slowly"
+    },
+    "checkStatus": {
+      "pending": "Coming up",
+      "active": "Do this now",
+      "passed": "Done",
+      "failed": "Not completed"
+    },
+    "markDone": "I have done this",
+    "integrityTitle": "Live presence checks",
+    "integrityBody": "While you are on the call we measure a few things that tell a live person apart from a recording or an automated script. Nothing here is stored as video.",
+    "integrity": {
+      "gaze": "Eye movement",
+      "mouse": "Pointer movement",
+      "keystroke": "Typing rhythm",
+      "blink": "Blinks detected",
+      "head": "Head movement",
+      "score": "Live presence score"
+    },
+    "flags": {
+      "low_gaze_variation": "Very little eye movement seen",
+      "no_pointer_movement": "No pointer movement seen",
+      "machine_like_keystrokes": "Typing rhythm looks automated",
+      "no_blink_detected": "No blinks seen",
+      "static_head_pose": "Head did not move at all"
+    },
+    "submit": "Finish and send to the officer",
+    "submitted": "Sent to the officer",
+    "awaitingOfficer": "The verification officer is reviewing your call. You will be told as soon as they confirm.",
+    "completed": "The officer has confirmed your identity. Your life certificate can now be issued.",
+    "failed": "The officer could not complete the verification on this call.",
+    "bookAnother": "Book another slot",
+    "operatorTitle": "Demo: officer console",
+    "operatorBody": "In a real deployment this is the officer's screen, not the pensioner's. It is shown here so a demo can complete the flow.",
+    "operatorApprove": "Officer: confirm identity",
+    "operatorReject": "Officer: could not verify"
+  },
+  "onboarding": {
+    "start": "Show me how this works",
+    "restart": "Replay the guided tour",
+    "title": "Guided tour",
+    "stepCounter": "Step {{step}} of {{total}}",
+    "next": "Next",
+    "back": "Back",
+    "finish": "Finish",
+    "skip": "Skip the tour",
+    "whatNext": "What happens next",
+    "why": "Why this matters",
+    "steps": {
+      "welcome": {
+        "title": "Welcome to JeevanSetu",
+        "body": "This is where you prove you are alive so your pension keeps coming — from home, without travelling to an office.",
+        "why": "Every year, pensioners have to prove they are alive. Missing it stops the payments.",
+        "next": "We will walk through the four things on this page, one at a time."
+      },
+      "status": {
+        "title": "Your certificate status",
+        "body": "This card always tells you exactly where you stand and what, if anything, you need to do.",
+        "why": "If something is waiting on you, or waiting on us, it is written here in plain words.",
+        "next": "Next we will look at your pension payments."
+      },
+      "pension": {
+        "title": "Your pension and payments",
+        "body": "Every payment against your passbook number is listed here, including any that are on hold.",
+        "why": "If your pension has stopped, this page shows you exactly which months are affected and why.",
+        "next": "Next: how you prove it is you."
+      },
+      "verify": {
+        "title": "Proving it is you",
+        "body": "You build confidence step by step — a selfie, a liveness check, a document, or a relative confirming for you. You can stop and come back any time.",
+        "why": "If one method does not work for you, another one always will. Nothing dead-ends.",
+        "next": "Next: the final step before your certificate."
+      },
+      "call": {
+        "title": "The verification call",
+        "body": "A short video call with a verification officer is the last step before a full certificate is issued.",
+        "why": "A person confirming your identity is what makes the certificate valid for a full year.",
+        "next": "Last one: where to get help."
+      },
+      "help": {
+        "title": "If you get stuck",
+        "body": "You can ask our team to review your case personally. You will get a reference number and can follow what happens.",
+        "why": "Nobody should be locked out of their pension because a camera did not work.",
+        "next": "That is everything. You can replay this tour any time from Settings."
+      }
+    }
+  }
+}

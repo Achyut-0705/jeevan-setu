@@ -1,0 +1,20 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "pnpm install --no-frozen-lockfile",
+  "buildCommand": "pnpm --filter @jeevansetu/web build",
+  "outputDirectory": "apps/web/dist",
+  "framework": null,
+  "functions": {
+    "api/[...path].ts": {
+      "maxDuration": 30,
+      "excludeFiles": "node_modules/.pnpm/{@tensorflow,@vladmandic,better-sqlite3,tesseract.js}*/**",
+      "includeFiles": "node_modules/.pnpm/pdfkit@*/node_modules/pdfkit/js/data/**"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+node_modules/
+dist/
+build/
+.env
+.env.local
+*.local
+# DATA_DIR is resolved relative to the working directory, so a SQLite file can land
+# either under apps/api/ or at the repo root depending on how the API was started.
+**/data/*.db
+**/data/*.db-shm
+**/data/*.db-wal
+apps/api/data/*.db-journal
+apps/api/data/uploads/*
+!apps/api/data/uploads/.gitkeep
+.DS_Store
+*.log
+.vite/
+
+# Vercel CLI project link and local build output
+.vercel/
