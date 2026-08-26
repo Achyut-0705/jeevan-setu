@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@hono/node-server':
-        specifier: ^1.13.7
-        version: 1.19.17(hono@4.13.4)
       '@hono/zod-validator':
         specifier: ^0.4.2
         version: 0.4.3(hono@4.13.4)(zod@3.25.76)
