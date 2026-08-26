@@ -1,5 +1,5 @@
 {
-  "//": "Root config, used only for the Vercel Function entrypoint in api/. Each workspace package has its own tsconfig.",
+  "//": "Root config, used only for the Vercel Function entrypoint (vercel-entry.ts, bundled to api/[...path].js). Each workspace package has its own tsconfig.",
   "compilerOptions": {
     "target": "ES2022",
     "lib": ["ES2023"],
@@ -15,6 +15,6 @@
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["api/**/*.ts", "apps/api/src/**/*.ts", "packages/shared/src/**/*.ts"],
+  "include": ["vercel-entry.ts", "apps/api/src/**/*.ts", "packages/shared/src/**/*.ts"],
   "exclude": ["node_modules", "**/dist"]
 }
