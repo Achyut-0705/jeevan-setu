@@ -2,6 +2,7 @@
   "name": "jeevansetu",
   "private": true,
   "version": "0.1.0",
+  "type": "module",
   "scripts": {
     "dev": "concurrently -k -n api,web -c blue,green \"pnpm --filter @jeevansetu/api dev\" \"pnpm --filter @jeevansetu/web dev\"",
     "build": "pnpm --filter @jeevansetu/api build && pnpm --filter @jeevansetu/web build",
