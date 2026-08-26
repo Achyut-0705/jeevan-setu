@@ -5,13 +5,17 @@
   "outputDirectory": "apps/web/dist",
   "framework": null,
   "functions": {
-    "api/[...path].js": {
+    "api/index.js": {
       "maxDuration": 30,
       "excludeFiles": "node_modules/.pnpm/{@tensorflow,@vladmandic,better-sqlite3,tesseract.js}*/**",
       "includeFiles": "node_modules/.pnpm/pdfkit@*/node_modules/pdfkit/js/data/**"
     }
   },
   "rewrites": [
+    {
+      "source": "/api/:match*",
+      "destination": "/api"
+    },
     {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
