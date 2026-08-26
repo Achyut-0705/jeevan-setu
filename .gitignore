@@ -18,3 +18,6 @@ apps/api/data/uploads/*
 
 # Vercel CLI project link and local build output
 .vercel/
+
+.vercel
+.env*
