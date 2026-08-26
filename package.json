@@ -10,11 +10,19 @@
     "lint": "pnpm -r lint",
     "db:reset": "pnpm --filter @jeevansetu/api db:reset",
     "build:web": "pnpm --filter @jeevansetu/web build",
-    "build:fn": "esbuild vercel-entry.ts --bundle --platform=node --format=esm --target=node20 --outfile=api/[...path].js --external:better-sqlite3 --external:@tensorflow/tfjs --external:@tensorflow/tfjs-backend-wasm --external:@vladmandic/human --external:pdfkit",
+    "build:fn": "node scripts/build-fn.mjs",
     "vercel-build": "pnpm --filter @jeevansetu/web build && pnpm build:fn"
   },
   "dependencies": {
-    "pdfkit": "^0.15.1"
+    "@hono/node-server": "^1.13.7",
+    "@hono/zod-validator": "^0.4.2",
+    "hono": "^4.6.14",
+    "jpeg-js": "^0.4.4",
+    "jsonwebtoken": "^9.0.2",
+    "nanoid": "^5.0.9",
+    "pdfkit": "^0.15.1",
+    "qrcode": "^1.5.4",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "concurrently": "^9.1.0",
