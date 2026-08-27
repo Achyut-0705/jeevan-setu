@@ -14,10 +14,32 @@ import { appointmentRoutes } from "./routes/appointments";
 import { devRoutes } from "./routes/dev";
 import { enrollmentRoutes } from "./routes/enrollment";
 import { handleError } from "./middleware/error";
+import { ensureSeeded } from "./db/seed";
+import { flushToShared, hydrateFromShared } from "./db/sharedState";
 
 const app = new Hono();
 
 app.use("*", logger());
+
+/**
+ * Load the shared demo state before the request and publish it afterwards, so that
+ * state created on one serverless instance is visible to every other one. No-op
+ * outside Vercel's memory driver. See db/sharedState.ts for what this does and does
+ * not guarantee.
+ *
+ * Re-seeding after the hydrate matters: an instance whose store was just replaced by
+ * a snapshot from a different seed version — or that came up with nothing to load —
+ * still has to end up with the four personas present before any route reads them.
+ */
+app.use("*", async (c, next) => {
+  await hydrateFromShared();
+  ensureSeeded();
+  try {
+    await next();
+  } finally {
+    await flushToShared();
+  }
+});
 app.use(
   "/api/*",
   cors({

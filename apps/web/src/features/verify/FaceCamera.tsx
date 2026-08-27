@@ -33,6 +33,22 @@ interface FaceCameraProps {
   className?: string;
 }
 
+/**
+ * Minimum gap between two `human.detect()` calls, in milliseconds.
+ *
+ * The loop below is driven by requestAnimationFrame, which on a healthy display fires
+ * ~60 times a second. Running the full face pipeline — mesh, iris, emotion, antispoof
+ * and liveness — that often saturates the main thread on ordinary hardware and makes
+ * the whole page feel stuck, including the video preview it is supposed to be guiding.
+ * The readings only drive on-screen guidance ("come closer", "hold still"), which a
+ * person cannot react to faster than a few times a second, so detecting at roughly
+ * 8fps costs nothing a user can perceive and leaves the browser time to paint.
+ *
+ * This throttles the preview only. Capture (`captureJpeg`) and the descriptor path are
+ * untouched, so nothing that feeds scoring changes.
+ */
+const DETECT_INTERVAL_MS = 125;
+
 function guidanceFor(r: FrameReading): Guidance {
   if (r.faceCount === 0) return "no_face";
   if (r.faceCount > 1) return "multiple_faces";
@@ -69,12 +85,21 @@ export const FaceCamera = React.forwardRef<FaceCameraHandle, FaceCameraProps>(
         if (cancelled) return;
         setModelsReady(true);
 
+        let lastDetectAt = 0;
+
         const loop = async () => {
           const video = videoRef.current;
           if (cancelled || !video || !human || video.readyState < 2) {
             rafRef.current = requestAnimationFrame(() => void loop());
             return;
           }
+          // Yield the frame back to the browser unless enough time has passed; see
+          // DETECT_INTERVAL_MS.
+          if (performance.now() - lastDetectAt < DETECT_INTERVAL_MS) {
+            rafRef.current = requestAnimationFrame(() => void loop());
+            return;
+          }
+          lastDetectAt = performance.now();
           const result = await human.detect(video);
           if (cancelled) return;
           const reading = readFrame(

@@ -70,6 +70,18 @@ interface Driver {
   clear(): void;
   getMeta(key: string): string | null;
   setMeta(key: string, value: string): void;
+  /**
+   * Serialize / reload the whole store. Only the memory driver needs these: see
+   * `db/sharedState.ts`, which uses them to park the demo state somewhere every
+   * serverless instance can reach it. SQLite is already a shared file on disk.
+   */
+  snapshot(): StoreSnapshot;
+  restore(snapshot: StoreSnapshot): void;
+}
+
+export interface StoreSnapshot {
+  tables: Record<string, Record<string, unknown>>;
+  meta: Record<string, string>;
 }
 
 /* ------------------------------------------------------------------ memory */
@@ -107,6 +119,21 @@ function createMemoryDriver(): Driver {
     },
     getMeta: (key) => meta.get(key) ?? null,
     setMeta: (key, value) => void meta.set(key, value),
+    snapshot: () => ({
+      tables: Object.fromEntries(
+        [...data.entries()].map(([table, rows]) => [table, Object.fromEntries(rows)])
+      ),
+      meta: Object.fromEntries(meta),
+    }),
+    restore: (snap) => {
+      for (const m of data.values()) m.clear();
+      meta.clear();
+      for (const [table, rows] of Object.entries(snap.tables ?? {})) {
+        tbl(table);
+        for (const [id, row] of Object.entries(rows)) tbl(table).set(id, row);
+      }
+      for (const [k, v] of Object.entries(snap.meta ?? {})) meta.set(k, v);
+    },
   };
 }
 
@@ -192,6 +219,10 @@ function createSqliteDriver(): Driver {
         )
         .run(key, value);
     },
+    // A file on disk is already shared by every request in local dev; there is
+    // nothing to park elsewhere and nothing to reload.
+    snapshot: () => ({ tables: {}, meta: {} }),
+    restore: () => {},
   };
 }
 
@@ -244,3 +275,5 @@ export class Table<T extends { id: string }> {
 export const getMeta = (key: string) => driver.getMeta(key);
 export const setMeta = (key: string, value: string) => driver.setMeta(key, value);
 export const resetDatabase = () => driver.clear();
+export const snapshotStore = (): StoreSnapshot => driver.snapshot();
+export const restoreStore = (snap: StoreSnapshot) => driver.restore(snap);
