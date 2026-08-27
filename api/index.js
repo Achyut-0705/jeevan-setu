@@ -12746,11 +12746,6 @@ var require_lib = __commonJS({
   }
 });
 
-// node_modules/.pnpm/hono@4.13.4/node_modules/hono/dist/adapter/vercel/handler.js
-var handle = (app2) => (req) => {
-  return app2.fetch(req);
-};
-
 // node_modules/.pnpm/hono@4.13.4/node_modules/hono/dist/compose.js
 var compose = (middleware, onError, onNotFound) => {
   return (context, next) => {
@@ -19157,7 +19152,7 @@ var app_default = app;
 
 // vercel-entry.ts
 ensureSeeded();
-var vercel_entry_default = handle(app_default);
+var vercel_entry_default = app_default;
 export {
   vercel_entry_default as default
 };

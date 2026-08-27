@@ -1,4 +1,3 @@
-import { handle } from "hono/vercel";
 import app from "./apps/api/src/app";
 import { ensureSeeded } from "./apps/api/src/db/seed";
 
@@ -13,15 +12,25 @@ import { ensureSeeded } from "./apps/api/src/db/seed";
  * for `api/*.ts` does not bundle, so an un-bundled entry crashes at runtime with
  * `ERR_MODULE_NOT_FOUND`.
  *
- * Uses hono/vercel's `handle()` — a plain `(Request) => Response | Promise<Response>`
- * — rather than `@hono/node-server`'s `getRequestListener()`. The latter adapts a
- * classic Node `(req, res)` server to Hono's fetch handler by hand-converting
- * `http.IncomingMessage`/`ServerResponse` to/from the Fetch API, and that translation
- * hung indefinitely for any request with a body once actually deployed (GET requests
- * worked; every POST timed out at Vercel's 30s function limit) — reproducible only in
- * the real Vercel runtime, not against a local http.Server. Vercel's Node.js Functions
- * natively support exporting a Web Fetch-style handler, so `hono/vercel` skips that
- * translation layer altogether.
+ * Exports the Hono app instance directly rather than wrapping it. Vercel's Node.js
+ * runtime recognizes exactly one Fetch-style shape for a default export:
+ * `{ fetch(request: Request): Response }` (see
+ * https://vercel.com/docs/functions/functions-api-reference, which names Hono
+ * explicitly as a supported framework for this). A Hono app instance already has a
+ * `.fetch` method with that exact signature, so it satisfies the shape as-is.
+ *
+ * Both earlier attempts fed that recognizer a plain function instead of an object
+ * with a `.fetch` method, and Vercel silently misclassified each one as the legacy
+ * `(req, res) => void` Node handler signature — logging "default export returned a
+ * `Response` ... returns are ignored" and then hanging until the 30s function
+ * timeout, since nothing ever wrote through `res`. This reproduced for *every*
+ * request once actually deployed (GET included), not just POST bodies as it first
+ * appeared: `@hono/node-server`'s `getRequestListener()` returns a bare `(req, res)
+ * => void` node-style listener (never matches the fetch shape, always legacy), and
+ * `hono/vercel`'s `handle(app)` returns a bare `(req) => app.fetch(req)` function
+ * (still not an object with `.fetch`, still misclassified as legacy) — neither is
+ * detectable as a local-vs-deployed difference because the misclassification only
+ * happens in Vercel's real Node.js Functions runtime, not in a plain http.Server.
  *
  * Vercel maps every `/api/*` request onto the generated function via the rewrite in
  * vercel.json — so the same Hono app that `pnpm dev` serves from a long-lived Node
@@ -33,4 +42,4 @@ import { ensureSeeded } from "./apps/api/src/db/seed";
  */
 ensureSeeded();
 
-export default handle(app);
+export default app;
