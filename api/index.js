@@ -16510,6 +16510,9 @@ var DEFAULT_CONSENT_SCOPES = [
 function hash(value) {
   return crypto4.createHash("sha256").update(value).digest("hex");
 }
+function deriveUserId(uid) {
+  return `usr_${hash(`user:${uid}`).slice(0, 16)}`;
+}
 var AadhaarNotFoundError = class extends ApiError {
   constructor() {
     super(
@@ -16619,7 +16622,7 @@ function upsertUserFromAadhaar(record, now = /* @__PURE__ */ new Date()) {
   const pension = buildPensionInfo(record.uid, now);
   const profileBank = pensionBankFor(record.uid);
   const projected = {
-    id: existing?.id ?? `usr_${nanoid(10)}`,
+    id: existing?.id ?? deriveUserId(record.uid),
     mobile: record.registeredMobile,
     aadhaarUid: record.uid,
     maskedAadhaar: maskUid(record.uid),

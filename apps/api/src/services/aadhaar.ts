@@ -63,6 +63,26 @@ function hash(value: string) {
   return crypto.createHash("sha256").update(value).digest("hex");
 }
 
+/**
+ * The local user id, derived from the Aadhaar UID rather than randomly generated.
+ *
+ * This has to be deterministic because of how the app runs on Vercel. With
+ * PERSIST=memory (the default there, see env.ts) every serverless instance seeds its
+ * own copy of the demo state at cold start, and the access token carries this id as
+ * its `sub`. A random id per instance means a token minted by one instance names a
+ * user no other instance has: the JWT signature still verifies, so requireAuth passes,
+ * and the route's own lookup then misses and returns 404 USER_NOT_FOUND. That showed
+ * up in production as every authenticated screen failing in 0ms with a 404 while the
+ * client retried, since each retry could land on a different instance.
+ *
+ * Hashed rather than used directly, so the Aadhaar number never appears in a token or
+ * a URL. Truncated only for readability; collision risk across a four-persona demo
+ * registry is not a concern.
+ */
+function deriveUserId(uid: string) {
+  return `usr_${hash(`user:${uid}`).slice(0, 16)}`;
+}
+
 /* -------------------------------------------------------------- auth txns */
 
 export class AadhaarNotFoundError extends ApiError {
@@ -220,7 +240,7 @@ export function upsertUserFromAadhaar(record: AadhaarRecord, now = new Date()): 
   const profileBank = pensionBankFor(record.uid);
 
   const projected: User = {
-    id: existing?.id ?? `usr_${nanoid(10)}`,
+    id: existing?.id ?? deriveUserId(record.uid),
     mobile: record.registeredMobile,
     aadhaarUid: record.uid,
     maskedAadhaar: maskUid(record.uid),
