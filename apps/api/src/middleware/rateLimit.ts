@@ -14,6 +14,10 @@ export function rateLimit(key: (c: Context) => string, max: number, windowMs: nu
     } else {
       bucket.count += 1;
       if (bucket.count > max) {
+        // Tell the caller when the window actually reopens, so a retrying client waits
+        // exactly that long instead of guessing and hammering the limit again. The web
+        // client reads this in lib/api.ts and hands it to its backoff.
+        c.header("Retry-After", String(Math.max(1, Math.ceil((bucket.resetAt - now) / 1000))));
         throw new ApiError(429, "RATE_LIMITED", "Too many attempts. Please wait a moment and try again.");
       }
     }

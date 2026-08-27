@@ -50,6 +50,38 @@ app.use(
 
 app.onError(handleError);
 
+/**
+ * Endpoints whose response is the same for everybody and changes only when the code
+ * does: the demo persona directory and the health probe. Everything else in this API
+ * is either personal or a live verification state.
+ */
+const PUBLIC_CACHEABLE = new Set(["/api/health", "/api/aadhaar/directory"]);
+
+/**
+ * Say explicitly how each response may be cached, rather than leaving it to defaults.
+ *
+ * The two public reads above get a short shared cache window: the login screen asks
+ * for the directory on every visit, and the answer is identical for every visitor, so
+ * serving repeats from the edge saves a function invocation. `stale-while-revalidate`
+ * means a caller never waits on the refresh.
+ *
+ * Everything else is `private, no-store`. These responses carry someone's name, date
+ * of birth, address, pension payments and verification progress; that must not sit in
+ * a shared cache, and on a device the pensioner may be borrowing it should not linger
+ * in the browser's disk cache either. The client still caches in memory for the
+ * window that lib/queryClient.ts sets, which is where the deduplication actually
+ * matters — no-store constrains the HTTP layer, not React Query's own store.
+ */
+app.use("/api/*", async (c, next) => {
+  await next();
+  if (c.res.headers.has("Cache-Control")) return;
+  const cacheable = c.req.method === "GET" && PUBLIC_CACHEABLE.has(new URL(c.req.url).pathname);
+  c.res.headers.set(
+    "Cache-Control",
+    cacheable ? "public, max-age=60, stale-while-revalidate=300" : "private, no-store"
+  );
+});
+
 app.route("/api/health", healthRoutes);
 // The mocked UIDAI service: login, consent, family and face-authentication all
 // originate here, because that is where personal data lives. See routes/aadhaar.ts.

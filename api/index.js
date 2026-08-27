@@ -17522,6 +17522,7 @@ function rateLimit(key, max, windowMs) {
     } else {
       bucket.count += 1;
       if (bucket.count > max) {
+        c.header("Retry-After", String(Math.max(1, Math.ceil((bucket.resetAt - now) / 1e3))));
         throw new ApiError(429, "RATE_LIMITED", "Too many attempts. Please wait a moment and try again.");
       }
     }
@@ -20465,6 +20466,16 @@ app.use(
   })
 );
 app.onError(handleError);
+var PUBLIC_CACHEABLE = /* @__PURE__ */ new Set(["/api/health", "/api/aadhaar/directory"]);
+app.use("/api/*", async (c, next2) => {
+  await next2();
+  if (c.res.headers.has("Cache-Control")) return;
+  const cacheable = c.req.method === "GET" && PUBLIC_CACHEABLE.has(new URL(c.req.url).pathname);
+  c.res.headers.set(
+    "Cache-Control",
+    cacheable ? "public, max-age=60, stale-while-revalidate=300" : "private, no-store"
+  );
+});
 app.route("/api/health", healthRoutes);
 app.route("/api/aadhaar", aadhaarRoutes);
 app.route("/api/auth", authRoutes);

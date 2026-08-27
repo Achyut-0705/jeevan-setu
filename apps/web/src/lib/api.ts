@@ -36,10 +36,26 @@ export class ApiClientError extends Error {
   constructor(
     public status: number,
     public code: string,
-    message: string
+    message: string,
+    /**
+     * How long the server asked us to wait, in milliseconds, or null if it did not
+     * say. Read from the `Retry-After` header on a 429 so the retry policy in
+     * queryClient.ts can obey the rate limiter instead of guessing at it.
+     */
+    public retryAfterMs: number | null = null
   ) {
     super(message);
   }
+}
+
+/** `Retry-After` is either a count of seconds or an HTTP date; both are allowed. */
+function parseRetryAfter(res: Response): number | null {
+  const raw = res.headers.get("Retry-After");
+  if (!raw) return null;
+  const seconds = Number(raw);
+  if (Number.isFinite(seconds)) return Math.max(0, seconds * 1000);
+  const at = Date.parse(raw);
+  return Number.isNaN(at) ? null : Math.max(0, at - Date.now());
 }
 
 let refreshPromise: Promise<AuthTokens | null> | null = null;
@@ -99,7 +115,12 @@ export async function api<T>(path: string, options: RequestOptions = {}): Promis
   const json = await res.json().catch(() => ({}));
   if (!res.ok) {
     const err = (json as { error?: { code: string; message: string } }).error;
-    throw new ApiClientError(res.status, err?.code ?? "UNKNOWN", err?.message ?? "Something went wrong.");
+    throw new ApiClientError(
+      res.status,
+      err?.code ?? "UNKNOWN",
+      err?.message ?? "Something went wrong.",
+      parseRetryAfter(res)
+    );
   }
   return json as T;
 }
